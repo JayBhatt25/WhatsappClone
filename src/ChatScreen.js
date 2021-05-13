@@ -1,4 +1,4 @@
-import { Avatar } from '@material-ui/core'
+import { Avatar, IconButton } from '@material-ui/core'
 import React from 'react'
 import './ChatScreen.css'
 import SearchIcon from '@material-ui/icons/Search';
@@ -13,8 +13,12 @@ function ChatScreen() {
                     <p>Jay</p>
                 </div>
                 <div className='chatScreen__headerRight'>
-                    <SearchIcon />
-                    <MoreVertIcon />
+                    <IconButton>
+                        <SearchIcon />
+                    </IconButton>
+                    <IconButton>
+                        <MoreVertIcon />
+                    </IconButton>
 
                 </div>
             </div>
