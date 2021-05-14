@@ -1,5 +1,7 @@
 .chatScreen {
   flex: 0.7;
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
@@ -14,10 +16,23 @@
 .chatScreen__headerLeft {
   display: flex;
   align-items: center;
-  text-align: center;
   justify-content: space-around;
-  width: 8%;
+  width: 25%;
   padding-left: 10px;
+}
+
+.chatScreen__headerLeftDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatScreen__headerLeftDetails > h3 {
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.chatScreen__headerLeftDetails > p {
+  color: gray;
 }
 
 .chatScreen__headerRight {
@@ -25,4 +40,46 @@
   align-items: center;
   justify-content: space-evenly;
   width: 20%;
+}
+
+.chatScreen__body {
+  flex: 1;
+  background-image: url("https://dizwa.com/simulators/wp-content/themes/seo-wp/whatsapp/images/whatsapp-background.png");
+  background-position: center;
+  background-repeat: repeat;
+  overflow: scroll;
+  height: 92%;
+  padding: 30px;
+}
+
+.chatScreen__body::-webkit-scrollbar {
+  display: none;
+}
+
+.chat__message {
+  position: relative;
+  margin-top: 30px;
+  font-size: 16px;
+  padding: 20px;
+  background-color: #ffffff;
+  width: fit-content;
+  max-width: 50%;
+  flex-wrap: wrap;
+  border-radius: 10px;
+}
+
+.chat__receiver {
+  background-color: #dcf8d6;
+  margin-left: auto;
+}
+.chat__timestamp {
+  font-size: xx-small;
+  margin-left: 10px;
+}
+
+.chat__name {
+  position: absolute;
+  top: -18px;
+  font-weight: 800;
+  font-size: small;
 }

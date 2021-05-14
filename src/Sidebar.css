@@ -57,3 +57,13 @@
   margin: 10px;
   outline-width: 0;
 }
+
+.sidebar__chat {
+  flex: 1;
+  background-color: white;
+  overflow: scroll;
+}
+
+.sidebar__chat::-webkit-scrollbar {
+  display: none;
+}
