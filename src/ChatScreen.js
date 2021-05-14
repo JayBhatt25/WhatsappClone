@@ -3,6 +3,7 @@ import React from 'react'
 import './ChatScreen.css'
 import SearchIcon from '@material-ui/icons/Search';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { AttachFile, InsertEmoticon, Mic, Send } from '@material-ui/icons';
 
 function ChatScreen() {
     return (
@@ -45,6 +46,22 @@ function ChatScreen() {
                     <span className='chat__timestamp'>{new Date().toLocaleString()}</span>
                 </p>
 
+            </div>
+            <div className='chatScreen__footer'>
+                <div className='footer__left'>
+                    <InsertEmoticon />
+                    <AttachFile />
+                </div>
+                
+                <div className='footer__center'>
+                    <form>
+                        <input className='chat__input' type='text' placeholder='Type a message...'></input>
+                        <button type='submit'></button>
+                    </form>
+                </div>
+                <div className='footer__right'>
+                 <Mic />
+                </div>
             </div>
         </div>
     )

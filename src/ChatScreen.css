@@ -1,4 +1,5 @@
 .chatScreen {
+  position: relative;
   flex: 0.7;
   display: flex;
   flex-direction: column;
@@ -82,4 +83,49 @@
   top: -18px;
   font-weight: 800;
   font-size: small;
+}
+
+.chatScreen__footer {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  height: 62px;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid lightgray;
+  background-color: #f6f6f6;
+}
+
+.footer__center > form > button {
+  display: none;
+  border: none;
+}
+.footer__center > form {
+  display: flex;
+}
+.footer__center > form > input {
+  flex: 1;
+  border-radius: 20px;
+  padding: 10px;
+  border: none;
+}
+.footer__center {
+  flex: 0.85;
+}
+.footer__left {
+  flex: 0.05;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.footer__right {
+  flex: 0.1;
+  padding-left: 10px;
+}
+
+.chatScreen__footer > .MuiSvgIcon-root {
+  font-size: large;
 }
