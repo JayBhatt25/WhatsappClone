@@ -51,6 +51,7 @@
   overflow: scroll;
   height: 92%;
   padding: 30px;
+  margin-bottom: 60px;
 }
 
 .chatScreen__body::-webkit-scrollbar {
@@ -107,6 +108,7 @@
 }
 .footer__center > form > input {
   flex: 1;
+  outline-width: 0;
   border-radius: 20px;
   padding: 10px;
   border: none;
