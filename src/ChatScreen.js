@@ -1,31 +1,54 @@
 import { Avatar, IconButton } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './ChatScreen.css'
 import SearchIcon from '@material-ui/icons/Search';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { AttachFile, InsertEmoticon, Mic, Send } from '@material-ui/icons';
+import { AlternateEmail, AttachFile, InsertEmoticon, Mic, Send } from '@material-ui/icons';
 import axios from './axios'
+import { useDataLayerValue } from './Datalayer';
+import { useParams } from 'react-router';
 
 function ChatScreen({messages}) {
+    const [user, setUser] = useState(null);
     const [input, setInput] = useState("");
+    const [room, dispatch] = useDataLayerValue();
+    const [rminfo, setRmInfo] = useState([]);
+    const roomId = useParams();
+  const idinStr = String(roomId.id);
+  const toget = `/room/${idinStr}`;
+
+  useEffect(() => {
+       
+    axios.get(toget).then(response => {
+      setRmInfo(response.data);
+    })
+      
+  console.log(rminfo);
+ 
+},[toget])
+   
+    
     const sendMessage = async (e) => {
         e.preventDefault();
         await axios.post('/messages/new',{
             message: input,
             name: "Set user",
             timestamp: "Just now",
-            received: false.valueOf,
+            roomid: roomId.id,
+            received: user ? true : false,
 
         });
         setInput('');
     };
+
+
     return (
         <div className='chatScreen'>
             <div className='chatScreen__header'>
                 <div className='chatScreen__headerLeft'>
                     <Avatar />
                     <div className='chatScreen__headerLeftDetails'>
-                        <h3>Room name</h3>
+                        <h3>{rminfo.name}</h3>
                         <p>Last seen today at 21:09</p>
                     </div>
                 </div>
@@ -39,13 +62,16 @@ function ChatScreen({messages}) {
 
                 </div>
             </div>
-            <div className='chatScreen__body'>
+            <div className='chatScreen__body' id='chatBody'>
                 {messages.map(message => (
-                     <p className= {`chat__message ${message.received && 'chat__receiver'} `}>
+                    (message.roomid === roomId.id ? (
+                        <p className= {`chat__message ${message.received && 'chat__receiver'} `}>
                      <span className='chat__name'>{message.name}</span>
                      {message.message}
                      <span className='chat__timestamp'>{message.timestamp}</span>
                      </p>
+                    ): (<> </>))
+                     
                 ))}
                
             </div>

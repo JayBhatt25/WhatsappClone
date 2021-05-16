@@ -5,17 +5,29 @@ import ChatScreen from './ChatScreen';
 import Sidebar from './Sidebar';
 import Pusher from 'pusher-js';
 import axios from './axios'
+import { Route,BrowserRouter as  Router, Switch, useParams } from 'react-router-dom';
 
 
 function App() {
   const [messages, setMessges] = useState([]);
+  const [rooms, setRooms] = useState([]);
+  
+
+ 
+
+
 
   useEffect(()=> {
     axios.get('/messages/sync').then(response => {
-      console.log(response.data);
+      
       setMessges(response.data);
-    })
-  },[]);
+    });
+
+    axios.get('rooms/sync').then(res => {
+      setRooms(res.data);
+
+    });
+  },[rooms]);
 
   useEffect(()=> {
     const pusher = new Pusher('b270a904cc54b4bdfd48', {
@@ -34,19 +46,42 @@ function App() {
     }
   },[messages]);
 
-  console.log(messages);
+  ;
   return (
-    <div className="app">
-     <div className='app__greenHeader'>
+    
 
-     </div>
-     <div className='app__main'>
-        <Sidebar />
-        <ChatScreen messages = {messages} /> 
+        <div className="app">
+            <Router>
+              <Switch>
+                <Route path='/room/:id'>
+                      <div className='app__greenHeader'>
 
-     </div>
-     
-    </div>
+                       </div>
+                      <div className='app__main'>
+                          <Sidebar rooms={rooms} />
+                          <ChatScreen messages = {messages} /> 
+
+                      </div>
+                </Route>
+               <Route path='/'>
+                  <div className='app__greenHeader'>
+
+                  </div>
+                  <div className='app__main'>
+                      <Sidebar rooms={rooms} />
+                      <ChatScreen messages = {messages} /> 
+
+                  </div>
+                </Route>
+              </Switch>
+      
+      
+            </Router>
+
+        </div>
+
+        
+    
   );
 }
 

@@ -67,3 +67,32 @@
 .sidebar__chat::-webkit-scrollbar {
   display: none;
 }
+
+.sidebar__createRoom {
+  height: 5%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar__createRoomForm {
+  padding: 10px;
+  display: flex;
+}
+.sidebar__createRoomForm > form {
+  width: 100%;
+}
+.sidebar__createRoomForm > form > input {
+  outline-width: 0;
+  flex: 1;
+  border-radius: 20px;
+  border: 1px solid gray;
+  height: 30px;
+  width: 50%;
+  padding: 5px;
+}
+
+.sidebar__createRoomForm > form > button {
+  display: none;
+}
