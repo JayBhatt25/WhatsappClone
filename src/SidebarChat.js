@@ -1,39 +1,36 @@
 
 import { Avatar } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDataLayerValue } from './Datalayer';
-import { actionTypes } from './reducer';
 import {useHistory} from 'react-router-dom';
 import './SidebarChat.css'
 
-function SidebarChat({id, name, messages}) {
+function SidebarChat({id, name}) {
     const [roomDetails, setRoomDetails] = useState([]);
     const [room, dispatch] = useDataLayerValue();
     const history = useHistory();
+    const [seed, setSeed] = useState('');
 
+
+    useEffect(() => {
+        setSeed(Math.floor(Math.random() * 3000));
+    }, [])
     const handleClick = () => {
 
         history.push(`/room/${id}`);
         setRoomDetails([{
             id: id,
             name: name,
-            messages: messages,
+
 
         }]);
-
-        dispatch({
-            roomId: id,
-            roomName: name,
-            messages: messages,
-        });
         console.log(room);
     }
     return (
-        <div className='sidebarChat'>
-            <Avatar />
-            <div onClick={handleClick} className='sidebarChat__details'>
+        <div onClick={handleClick} className='sidebarChat'>
+            <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+            <div  className='sidebarChat__details'>
                 <h2>{name}</h2>
-                <p>This is the latest message.</p>
             </div>
         </div>
     )

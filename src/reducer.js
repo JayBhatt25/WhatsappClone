@@ -1,23 +1,19 @@
 export const initialState = {
-    roomId: null,
-    roomName: 'Default', 
-    roomMessages: [],
+   user: null,
 };
 
 export const actionTypes = {
-    SET_ROOM: 'SET_ROOM',
+    SET_USER: 'SET_USER',
 };
 
 export const reducer = (state,action) => {
     console.log(action)
 
     switch(action.type){
-        case actionTypes.SET_ROOM:
+        case actionTypes.SET_USER:
             return {
                 ...state,
-                roomId: action.roomId,
-                roomName: action.roomName,
-                roomMessages: [...state.roomMessages, action.messages],
+               user: action.user,
             }
         default:
             return state;

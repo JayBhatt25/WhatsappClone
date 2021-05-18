@@ -9,14 +9,13 @@ import { useDataLayerValue } from './Datalayer';
 import { useParams } from 'react-router';
 
 function ChatScreen({messages}) {
-    const [user, setUser] = useState(null);
+    const [{user}, dispatch] = useDataLayerValue();
     const [input, setInput] = useState("");
-    const [room, dispatch] = useDataLayerValue();
     const [rminfo, setRmInfo] = useState([]);
     const roomId = useParams();
   const idinStr = String(roomId.id);
   const toget = `/room/${idinStr}`;
-
+    const date = new Date();
   useEffect(() => {
        
     axios.get(toget).then(response => {
@@ -32,8 +31,8 @@ function ChatScreen({messages}) {
         e.preventDefault();
         await axios.post('/messages/new',{
             message: input,
-            name: "Set user",
-            timestamp: "Just now",
+            name: user ? user.displayName : "Set user",
+            timestamp: date.toLocaleString(),
             roomid: roomId.id,
             received: user ? true : false,
 
@@ -65,7 +64,7 @@ function ChatScreen({messages}) {
             <div className='chatScreen__body' id='chatBody'>
                 {messages.map(message => (
                     (message.roomid === roomId.id ? (
-                        <p className= {`chat__message ${message.received && 'chat__receiver'} `}>
+                        <p className= {`chat__message ${user.displayName === message.name && message.received && 'chat__receiver'} `}>
                      <span className='chat__name'>{message.name}</span>
                      {message.message}
                      <span className='chat__timestamp'>{message.timestamp}</span>

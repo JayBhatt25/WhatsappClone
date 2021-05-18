@@ -6,12 +6,24 @@ import Sidebar from './Sidebar';
 import Pusher from 'pusher-js';
 import axios from './axios'
 import { Route,BrowserRouter as  Router, Switch, useParams } from 'react-router-dom';
+import Login from './Login';
+import { useDataLayerValue } from './Datalayer';
 
 
 function App() {
   const [messages, setMessges] = useState([]);
   const [rooms, setRooms] = useState([]);
+  const [{user}, dispatch] = useDataLayerValue();
+
   
+  
+  
+  useEffect(() => {
+    axios.get('rooms/sync').then(res => {
+      setRooms(res.data);
+
+    });
+  }, [rooms])
 
  
 
@@ -23,10 +35,7 @@ function App() {
       setMessges(response.data);
     });
 
-    axios.get('rooms/sync').then(res => {
-      setRooms(res.data);
-
-    });
+   
   },[rooms]);
 
   useEffect(()=> {
@@ -51,33 +60,42 @@ function App() {
     
 
         <div className="app">
+          {!user ? (
+           <div className='app__signInContainer'> 
+              <Login />
+           </div>
+            
+            
+          ) : (
             <Router>
-              <Switch>
-                <Route path='/room/:id'>
-                      <div className='app__greenHeader'>
+            <Switch>
+              <Route path='/room/:id'>
+                    <div className='app__greenHeader'>
 
-                       </div>
-                      <div className='app__main'>
-                          <Sidebar rooms={rooms} />
-                          <ChatScreen messages = {messages} /> 
+                     </div>
+                    <div className='app__main'>
+                        <Sidebar rooms={rooms} />
+                        <ChatScreen messages = {messages} /> 
 
-                      </div>
-                </Route>
-               <Route path='/'>
-                  <div className='app__greenHeader'>
+                    </div>
+              </Route>
+             <Route path='/'>
+                <div className='app__greenHeader'>
 
-                  </div>
-                  <div className='app__main'>
-                      <Sidebar rooms={rooms} />
-                      <ChatScreen messages = {messages} /> 
+                </div>
+                <div className='app__main'>
+                    <Sidebar rooms={rooms} messages = {messages} />
+                    <ChatScreen messages = {messages} /> 
 
-                  </div>
-                </Route>
-              </Switch>
-      
-      
-            </Router>
+                </div>
+              </Route>
+            </Switch>
+    
+    
+          </Router>
 
+          )}
+           
         </div>
 
         

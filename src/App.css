@@ -6,14 +6,27 @@
 .app {
   background-color: #dadbd5;
   height: 100vh;
+  display: grid;
+  align-items: center;
 }
 
 .app__main {
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  width: 90%;
-  height: 95%;
+  width: 90vw;
+  height: 95vh;
   transform: translateY(-130px);
+  background-color: white;
+}
+
+.app__signInContainer {
+  width: 50%;
+  height: 70%;
+  display: grid;
+  position: relative;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
   background-color: white;
 }

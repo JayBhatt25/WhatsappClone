@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './Sidebar.css'
 import Avatar from '@material-ui/core/Avatar'
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
@@ -11,10 +11,10 @@ import SidebarChat from './SidebarChat';
 import axios from './axios'
 import { useDataLayerValue } from './Datalayer';
 
-function Sidebar({rooms}) {
+function Sidebar({rooms, messages}) {
     const [roomname, setRoomName] = useState('');
     const [open, setOpen] = useState(false);
-    const [{room}, dispatch] = useDataLayerValue();
+    const [{user}] = useDataLayerValue();
 
     
    
@@ -32,7 +32,7 @@ function Sidebar({rooms}) {
         <div className='sidebar'>
             <div className='sidebar__header'>
                 <div className='sidebar__headerLeft'>
-                    <Avatar>J</Avatar>
+                    <Avatar src={user.photoURL}></Avatar>
                 </div>
                 <div className='sidebar__headerRight'>
                     <IconButton>
@@ -77,7 +77,7 @@ function Sidebar({rooms}) {
             
             <div className='sidebar__chat'>
                 {rooms.map(room => (
-                    <SidebarChat id = {room._id}name={room.name} messages={room.messages} />
+                    <SidebarChat id = {room._id}name={room.name}  />
                 ))}
                 
             </div>
