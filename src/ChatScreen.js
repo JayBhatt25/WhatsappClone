@@ -18,13 +18,13 @@ function ChatScreen({messages}) {
     const date = new Date();
   useEffect(() => {
        
-    axios.get(toget).then(response => {
-      setRmInfo(response.data);
-    })
+        axios.get(toget).then(response => {
+        setRmInfo(response.data);
+        })
       
-  console.log(rminfo);
+        console.log(rminfo);
  
-},[toget])
+    },[toget])
    
     
     const sendMessage = async (e) => {
@@ -47,7 +47,7 @@ function ChatScreen({messages}) {
                 <div className='chatScreen__headerLeft'>
                     <Avatar />
                     <div className='chatScreen__headerLeftDetails'>
-                        <h3>{rminfo.name}</h3>
+                        <h3>{rminfo ? rminfo.name : "General"}</h3>
                         <p>Last seen today at 21:09</p>
                     </div>
                 </div>

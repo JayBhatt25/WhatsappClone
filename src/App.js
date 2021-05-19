@@ -8,6 +8,7 @@ import axios from './axios'
 import { Route,BrowserRouter as  Router, Switch, useParams } from 'react-router-dom';
 import Login from './Login';
 import { useDataLayerValue } from './Datalayer';
+import StartScreen from './StartScreen';
 
 
 function App() {
@@ -85,8 +86,8 @@ function App() {
                 </div>
                 <div className='app__main'>
                     <Sidebar rooms={rooms} messages = {messages} />
-                    <ChatScreen messages = {messages} /> 
-
+                    {/* <ChatScreen messages = {messages} />  */}
+                    <StartScreen />
                 </div>
               </Route>
             </Switch>
